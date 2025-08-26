@@ -1,0 +1,1 @@
+//aabcccccddd would become 
