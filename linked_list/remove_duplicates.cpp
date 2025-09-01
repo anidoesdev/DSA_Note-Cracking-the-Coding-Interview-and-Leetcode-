@@ -26,6 +26,26 @@ void remove_dups(ListNode* head){
         head = head->next;
     }
 }
+//no buffer required 
+void using_two_pointer(ListNode* head){
+    ListNode* slow = head;
+    
+
+    while(slow!=NULL){
+        ListNode* fast = slow;
+        while(fast->next != NULL){
+            if(fast->next->val == slow->val){
+                fast->next = fast->next->next;
+            }else{
+                fast = fast->next;
+            }
+            
+        }
+        slow = slow->next;
+
+    }
+}
+
 void printList(ListNode* node){
     while(node!=nullptr){
         cout<< node->val << "->";
@@ -44,7 +64,9 @@ int main(){
 
     printList(head);
 
-    remove_dups(head);
+    // remove_dups(head);
+    using_two_pointer(head);
+
 
     printList(head);
 
@@ -52,5 +74,5 @@ int main(){
 }
 
 
-//no buffer required 
+
 
