@@ -1,5 +1,6 @@
 remove_duplicates.exe
 return_element.exe
-delete_middle_node.exe
 partition.exe
 sum_lists.exe
+delete_middle_node.exe
+
