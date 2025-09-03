@@ -28,7 +28,7 @@ bool isPalindrome(ListNode* head,ListNode* reverse){
     }
     return true;
 }
-
+//different approaches left
 int main(){
     ListNode* head = new ListNode(0);
     head->next = new ListNode(1);
