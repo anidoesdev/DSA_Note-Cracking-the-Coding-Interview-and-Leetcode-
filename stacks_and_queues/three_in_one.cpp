@@ -1,4 +1,5 @@
 //Approach 1: Fixed divisions
+//have to complete it with second approach: flexible divisions
 #include<iostream>
 #include<vector>
 using namespace std;
