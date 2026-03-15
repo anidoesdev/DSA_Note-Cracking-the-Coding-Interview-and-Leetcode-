@@ -1,80 +1,39 @@
-#include<iostream>
-#include<cmath>
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-using namespace std;
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+def sum_list(head1, head2, carry):
+    res = ListNode()
+    value = carry
+    if head1 is not None:
+        value += head1.val
+    if head2 is not None:
+        value += head2.val
+    res.val = value % 10
+    if head1 is not None or head2 is not None:
+        sum_node = sum_list(head1.next if head1 is not None else None, head2.next if head2 is not None else None, 1 if value >= 10 else 0)
+        res.next = sum_node
+    return res
 
-ListNode* sum_list(ListNode* head1,ListNode* head2,int carry){
-    //by taking numbers in reverse order
-    ListNode* res = new ListNode();
-    int value = carry;
-    if(head1!=NULL){
-        value+=head1->val;
-    }
-    if(head2!=NULL){
-        value+=head2->val;
-    }
-    res->val = value%10;
-    if(head1!=NULL || head2!=NULL){
-        ListNode* sum = sum_list(head1==NULL ? NULL : head1->next,head2==NULL ? NULL : head2->next,value>=10 ? 1 : 0);
-        res->next = sum;
-    }
-    return res;
+def print_list(node):
+    while node is not None:
+        print(node.val, end='->')
+        node = node.next
+    print('NULL')
 
-    //by taking in forward order
-    // int count1 = 0;
-    // ListNode* temp1 = head1;
-    // while(temp1!=NULL){
-    //     count1++;
-    //     temp1 = temp1->next;
-    // }
-    // temp1 = head1;
-    // int num1 = 0;
-    // for(int i=count1;i>0;i--){
-    //     num1=((pow(10,i-1))*temp1->val)+num1;
-    //     temp1 = temp1->next;
-    // }
-    // int count2 = 0;
-    // ListNode* temp2 = head2;
-    // while(temp2!=NULL){
-    //     count2++;
-    //     temp2 = temp2->next;
-    // }
-    // temp2 = head2;
-    // int num2 = 0;
-    // for(int i=count2;i>0;i--){
-    //     num2+=pow(10,i-1)*temp2->val;
-    //     temp2 = temp2->next;
-    // }
-    // return num1+num2;
-}
-void printList(ListNode* node){
-    while(node!=nullptr){
-        cout<< node->val << "->";
-        node = node->next;
-    }
-    cout<< "NULL"<< endl;
-}
+def main():
+    head1 = ListNode(3)
+    head1.next = ListNode(5)
+    head1.next.next = ListNode(8)
 
+    head2 = ListNode(3)
+    head2.next = ListNode(5)
+    head2.next.next = ListNode(8)
 
+    print_list(sum_list(head1, head2, 0))
 
-int main(){
-    ListNode* head1 = new ListNode(3);
-    head1->next = new ListNode(5);
-    head1->next->next = new ListNode(8);
-
-    ListNode* head2 = new ListNode(3);
-    head2->next = new ListNode(5);
-    head2->next->next = new ListNode(8);
-
-    printList(sum_list(head1,head2,0));
-
-
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
