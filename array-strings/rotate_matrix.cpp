@@ -12,7 +12,7 @@ void rotate_matrix(vector<vector<int>>& matrix){
             swap(matrix[i][j],matrix[j][i]);
         }
     }
-    for(int i=0;i<m;i++){
+    for(int i=0;i<n;i++){
         reverse(matrix[i].begin(),matrix[i].end());
     }
 
@@ -25,18 +25,20 @@ int main(){
             matrix[i][j] = i * 3 + j + 1;
         }
     }
+    cout << "Original Matrix:" << endl;
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
-            cout<< matrix[i][j];
+            cout << matrix[i][j] << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
     rotate_matrix(matrix);
+    cout << "Rotated Matrix:" << endl;
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
-            cout<< matrix[i][j];
+            cout << matrix[i][j] << " ";
         }
-        cout<<endl;
+        cout << endl;
     }
     return 0;
 }
