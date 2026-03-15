@@ -1,49 +1,38 @@
-#include<iostream>
-#include<stack>
+```python
+class StackMin:
+    def __init__(self):
+        self.st1 = []
+        self.st2 = []
 
-using namespace std;
+    def push(self, value):
+        if not self.st2 or value <= self.st2[-1]:
+            self.st2.append(value)
+        self.st1.append(value)
 
-class stack_min{
-    stack<int> st1;
-    stack<int> st2;
-    public:
-        void push(int value){
-            if(value<=min()){
-                st2.push(value);
-            }
-            st1.push(value);
-        }
-        int pop(){
-            if(st1.empty()){
-                return -1;
-            }
-            int value = st1.top();
-            st1.pop();
-            if(value == min()){
-                st2.pop();
-            }
-            return value;
-        }
-        int min(){
-            if(st2.empty()){
-                return INT_MAX;
-            }
-            return st2.top();
-        }
-};
+    def pop(self):
+        if not self.st1:
+            return -1
+        value = self.st1.pop()
+        if value == self.st2[-1]:
+            self.st2.pop()
+        return value
 
-int main(){
-    stack_min super;
-    super.push(2);
-    super.push(1);
-    super.push(4);
-    super.push(10);
-    super.push(11);
-    cout<< super.min()<<endl;
-    cout<< super.pop()<<endl;
-    cout<< super.min();
-    
+    def min(self):
+        if not self.st2:
+            return float('inf')
+        return self.st2[-1]
 
+def main():
+    super_stack = StackMin()
+    super_stack.push(2)
+    super_stack.push(1)
+    super_stack.push(4)
+    super_stack.push(10)
+    super_stack.push(11)
+    print(super_stack.min())
+    print(super_stack.pop())
+    print(super_stack.min())
 
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
