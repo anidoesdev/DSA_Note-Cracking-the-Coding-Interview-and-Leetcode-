@@ -1,56 +1,43 @@
-#include<iostream>
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-using namespace std;
+def partition(head, partition):
+    start = head
+    end = head
+    while head is not None:
+        temp = head.next
+        if head.val < partition:
+            head.next = start
+            start = head
+        else:
+            end.next = head
+            end = head
+        head = temp
+    end.next = None
+    return start
 
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+def print_list(node):
+    while node is not None:
+        print(node.val, end='->')
+        node = node.next
+    print('NULL')
 
-ListNode* partition(ListNode* head,int partition){
-    ListNode* start = head;
-    ListNode* end = head;
-    while(head != NULL){
-        ListNode* temp = head->next;
-        if(head->val < partition){
-            head->next = start;
-            start = head;
-        }else{
-            end->next = head;
-            end = head;
-        }
-        head = temp;
+def main():
+    head = ListNode(3)
+    head.next = ListNode(5)
+    head.next.next = ListNode(8)
+    head.next.next.next = ListNode(5)
+    head.next.next.next.next = ListNode(10)
+    head.next.next.next.next.next = ListNode(2)
+    head.next.next.next.next.next.next = ListNode(1)
 
-    }
-    end->next = NULL;
-    return start;
-}
-void printList(ListNode* node){
-    while(node!=nullptr){
-        cout<< node->val << "->";
-        node = node->next;
-    }
-    cout<< "NULL"<< endl;
-}
+    print_list(head)
+    start = partition(head, 5)
+    print_list(start)
 
-
-int main(){
-    ListNode* head = new ListNode(3);
-    head->next = new ListNode(5);
-    head->next->next = new ListNode(8);
-    head->next->next->next = new ListNode(5);
-    head->next->next->next->next = new ListNode(10);
-    head->next->next->next->next->next = new ListNode(2);
-    head->next->next->next->next->next->next = new ListNode(1);
-
-    printList(head);
-    ListNode* start = partition(head,5);
-    printList(start);
-    
-
-
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
