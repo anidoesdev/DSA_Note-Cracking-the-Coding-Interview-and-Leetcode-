@@ -1,39 +1,29 @@
-#include <iostream>
-#include <string>
-#include <vector>
-
-using namespace std;
-
-void URLify (string& str,int n){
-    int space_count = 0;
-    for(int i=0;i<n;i++){
-        if(str[i] == ' '){
-            space_count++;
-        }
-    }
-    int index = n + space_count*2;
-    if(n < str.length()) str[n] = '\0';
-    for(int i = n-1;i>=0;i--){
-        if(str[i] == ' '){
-            str[index-1] = '0';
-            str[index - 2] = '2';
-            str[index-3] = '%';
-            index = index - 3;
-        }else{
-            str[index - 1] = str[i];
-            index = index - 1;
-        }
-    }
-}
+```python
+def URLify(s, n):
+    space_count = 0
+    for i in range(n):
+        if s[i] == ' ':
+            space_count += 1
+    index = n + space_count * 2
+    s = list(s)
+    for i in range(n - 1, -1, -1):
+        if s[i] == ' ':
+            s[index - 1] = '0'
+            s[index - 2] = '2'
+            s[index - 3] = '%'
+            index -= 3
+        else:
+            s[index - 1] = s[i]
+            index -= 1
+    return ''.join(s)
 
 
-int main() {
-    string str = "Mr John Smith    ";
-    int n = 13;
+def main():
+    s = "Mr John Smith    "
+    n = 13
+    print(URLify(s, n))
 
-    URLify(str,n);
 
-    cout<< str;
-
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
