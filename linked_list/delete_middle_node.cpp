@@ -1,53 +1,45 @@
-#include <iostream>
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-using namespace std;
+def delete_middle_node(head):
+    temp = head
+    count = 0
+    while temp is not None:
+        temp = temp.next
+        count += 1
+    prev = None
+    temp = head
+    for i in range(count // 2):
+        prev = temp
+        temp = temp.next
+    if prev is not None:
+        prev.next = temp.next
+    else:
+        head = head.next
+    return head
 
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+def print_list(node):
+    while node is not None:
+        print(node.val, end='->')
+        node = node.next
+    print('NULL')
 
-ListNode* delete_middle_node(ListNode* head){
-    ListNode* temp = head;
-    int count = 0;
-    while(temp!=NULL){
-        temp = temp->next;
-        count++;
-    }
-    ListNode* prev = NULL;
-    temp = head;
-    for(int i=0;i<count/2;i++){
-        prev = temp;
-        temp = temp->next;
-    }
-    prev->next = temp->next;
-    return head;
+def main():
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(3)
+    head.next.next.next = ListNode(4)
+    head.next.next.next.next = ListNode(5)
 
-}
+    print_list(head)
 
-void printList(ListNode* node){
-    while(node!=nullptr){
-        cout<< node->val << "->";
-        node = node->next;
-    }
-    cout<< "NULL"<< endl;
-}
+    head = delete_middle_node(head)
 
-int main(){
-    ListNode* head = new ListNode(1);
-    head->next = new ListNode(2);
-    head->next->next = new ListNode(3);
-    head->next->next->next = new ListNode(4);
-    head->next->next->next->next = new ListNode(5);
+    print_list(head)
 
-    printList(head);
-
-    delete_middle_node(head);
-
-    printList(head);
-
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
