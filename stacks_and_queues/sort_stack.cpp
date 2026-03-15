@@ -1,51 +1,60 @@
-#include<iostream>
-#include<stack>
+```python
+class Stack:
+    def __init__(self):
+        self.stack = []
 
-using namespace std;
+    def push(self, item):
+        self.stack.append(item)
 
-stack<int> sort_stack(stack<int> st){
-    stack<int> sort;
-    while(!st.empty()){
-        int temp = st.top();
-        st.pop();
-        while(!sort.empty() && sort.top() > temp){
+    def pop(self):
+        if not self.is_empty():
+            return self.stack.pop()
+        return None
 
-            st.push(sort.top());
-            sort.pop();
-        }
-        sort.push(temp);
-    }
-    while (!sort.empty())
-    {
-        st.push(sort.top());
-        sort.pop();
-    }
-    return st;
-    
-}
-void print_stack(stack<int>* st){
-    while(!st->empty()){
-        cout<< st->top()<<endl;
-        st->pop();
-    }
-}
+    def top(self):
+        if not self.is_empty():
+            return self.stack[-1]
+        return None
 
-int main(){
-    stack<int> st;
-    st.push(5);
-    st.push(4);
-    st.push(3);
-    st.push(2);
-    st.push(1);
-    st.push(6);
-
-    
-    st = sort_stack(st);
-    print_stack(&st);
-
-    
+    def is_empty(self):
+        return len(self.stack) == 0
 
 
+def sort_stack(st):
+    sort_st = Stack()
+    while not st.is_empty():
+        temp = st.pop()
+        while not sort_st.is_empty() and sort_st.top() > temp:
+            st.push(sort_st.pop())
+        sort_st.push(temp)
+    while not sort_st.is_empty():
+        st.push(sort_st.pop())
+    return st
 
-    return 0;
-}
+
+def print_stack(st):
+    temp_st = Stack()
+    while not st.is_empty():
+        temp = st.pop()
+        print(temp)
+        temp_st.push(temp)
+    while not temp_st.is_empty():
+        st.push(temp_st.pop())
+
+
+def main():
+    st = Stack()
+    st.push(5)
+    st.push(4)
+    st.push(3)
+    st.push(2)
+    st.push(1)
+    st.push(6)
+
+    st = sort_stack(st)
+    print_stack(st)
+
+
+if __name__ == "__main__":
+    main()
+```
