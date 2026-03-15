@@ -1,42 +1,25 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+```python
+def rotate_matrix(matrix):
+    m = len(matrix)
+    n = len(matrix[0])
+    for i in range(m):
+        for j in range(i+1, n):
+            matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+    for i in range(m):
+        matrix[i] = matrix[i][::-1]
 
-using namespace std;
+def print_matrix(matrix):
+    for row in matrix:
+        print(' '.join(map(str, row)))
 
-void rotate_matrix(vector<vector<int>>& matrix){
-    int m = matrix.size();
-    int n = matrix[0].size();
-    for(int i=0;i<m;i++){
-        for(int j=i+1;j<n;j++){
-            swap(matrix[i][j],matrix[j][i]);
-        }
-    }
-    for(int i=0;i<m;i++){
-        reverse(matrix[i].begin(),matrix[i].end());
-    }
+def main():
+    matrix = [[i * 3 + j + 1 for j in range(3)] for i in range(3)]
+    print("Original Matrix:")
+    print_matrix(matrix)
+    rotate_matrix(matrix)
+    print("Rotated Matrix:")
+    print_matrix(matrix)
 
-}
-
-int main(){
-    vector<vector<int>> matrix(3,vector<int>(3));
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            matrix[i][j] = i * 3 + j + 1;
-        }
-    }
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            cout<< matrix[i][j];
-        }
-        cout<<endl;
-    }
-    rotate_matrix(matrix);
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            cout<< matrix[i][j];
-        }
-        cout<<endl;
-    }
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
