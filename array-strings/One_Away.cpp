@@ -1,6 +1,6 @@
+```cpp
 #include <iostream>
 #include <string>
-#include <math.h>
 
 using namespace std;
 
@@ -12,27 +12,31 @@ bool one_away(string& str1, string& str2){
     
     int i = 0;
     int j = 0;
-    while(i<str1.length() && j<str2.length()){
-        if(first[i]!=second[j]){
+    while(i < first.length() && j < second.length()){
+        if(first[i] != second[j]){
             if(count >= 1) return false;
             count++;
-        }
-        if(second.length() == first.length()){
+            if(first.length() == second.length()) {
+                i++;
+                j++;
+            } else {
+                j++;
+            }
+        } else {
             i++;
-        }else{
-            i++;
+            j++;
         }
-        j++;
     }
-    return true;
+    if(j < second.length()) count++;
+    return count <= 1;
 }
-
 
 int main(){
     string str1 = "pale";
     string str2 = "pal";
 
-    cout<< one_away(str1,str2);
+    cout << boolalpha << one_away(str1, str2);
 
     return 0;
 }
+```
