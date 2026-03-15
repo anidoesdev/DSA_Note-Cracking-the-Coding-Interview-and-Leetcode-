@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stack>
+#include<climits>
 
 using namespace std;
 
@@ -8,7 +9,7 @@ class stack_min{
     stack<int> st2;
     public:
         void push(int value){
-            if(value<=min()){
+            if(st2.empty() || value <= st2.top()){
                 st2.push(value);
             }
             st1.push(value);
@@ -19,7 +20,7 @@ class stack_min{
             }
             int value = st1.top();
             st1.pop();
-            if(value == min()){
+            if(value == st2.top()){
                 st2.pop();
             }
             return value;
@@ -41,9 +42,6 @@ int main(){
     super.push(11);
     cout<< super.min()<<endl;
     cout<< super.pop()<<endl;
-    cout<< super.min();
-    
-
-
+    cout<< super.min()<<endl;
     return 0;
 }
