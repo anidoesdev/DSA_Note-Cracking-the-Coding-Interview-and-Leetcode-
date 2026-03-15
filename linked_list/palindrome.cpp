@@ -9,14 +9,15 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 ListNode* reverse(ListNode* head){
-    ListNode* temp = NULL;
-    while(head!=NULL){
-        ListNode* n = new ListNode(head->val);
-        n->next = temp;
-        temp = n;
-        head = head->next;
+    ListNode* prev = NULL;
+    ListNode* curr = head;
+    while(curr!=NULL){
+        ListNode* next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
     }
-    return temp;
+    return prev;
 }
 bool isPalindrome(ListNode* head,ListNode* reverse){
     while(head!=NULL && reverse!=NULL){
@@ -28,7 +29,6 @@ bool isPalindrome(ListNode* head,ListNode* reverse){
     }
     return true;
 }
-//different approaches left
 int main(){
     ListNode* head = new ListNode(0);
     head->next = new ListNode(1);
