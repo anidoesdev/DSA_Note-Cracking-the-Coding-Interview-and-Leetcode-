@@ -1,58 +1,42 @@
-#include<iostream>
-#include<vector>
-#include<stack>
+```python
+class MultiStack:
+    def __init__(self, capacity):
+        self.st = []
+        self.capacity = capacity
+        self.curr = -1
 
-using namespace std;
+    def push(self, value):
+        if self.curr == -1 or len(self.st[self.curr]) == self.capacity:
+            self.st.append([value])
+            self.curr += 1
+            print("new stack created")
+            return
+        self.st[self.curr].append(value)
 
-class multiStack{
-    vector<stack<int>*> st;
-    int capacity;
-    int curr;
-    public:
-        multiStack(int capacity){
-            curr = -1;
-            capacity = capacity;
-        }
-        void push(int value){
-            if(curr == -1 || st[curr]->size()==capacity){
-                stack<int>* temp = new stack<int>;
-                temp->push(value);
-                st.push_back(temp);
-                curr++;
-                cout<<"new stack created"<<endl;
-                return;
-            }
-            st[curr]->push(value);
-        }
-        int pop(){
-            if(curr > -1){
-                int res = -1;
-                if(st[curr]->size()>0){
-                    res = st[curr]->top();
-                    st[curr]->pop();
-                    if(st[curr]->size()==0){
-                        st.pop_back();
-                        curr--;
-                        cout<<"stack deleted";
-                    }
-                    
-                }
-                return res;
-            }
-            return -1;
-        }
-    
-};
-int main(){
-    multiStack super(5);
-    super.push(1);
-    super.push(2);
-    super.push(3);
-    super.push(4);
-    super.push(5);
-    super.push(6);
-    super.push(7);
-    cout<< super.pop();
-    
-    return 0;
-}
+    def pop(self):
+        if self.curr > -1:
+            if len(self.st[self.curr]) > 0:
+                res = self.st[self.curr].pop()
+                if len(self.st[self.curr]) == 0:
+                    self.st.pop()
+                    self.curr -= 1
+                    print("stack deleted")
+                return res
+        return -1
+
+
+def main():
+    super_stack = MultiStack(5)
+    super_stack.push(1)
+    super_stack.push(2)
+    super_stack.push(3)
+    super_stack.push(4)
+    super_stack.push(5)
+    super_stack.push(6)
+    super_stack.push(7)
+    print(super_stack.pop())
+
+
+if __name__ == "__main__":
+    main()
+```
