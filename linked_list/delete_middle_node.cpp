@@ -11,21 +11,17 @@ struct ListNode {
 };
 
 ListNode* delete_middle_node(ListNode* head){
-    ListNode* temp = head;
-    int count = 0;
-    while(temp!=NULL){
-        temp = temp->next;
-        count++;
+    if (head == nullptr || head->next == nullptr) return head;
+    ListNode* slow = head;
+    ListNode* fast = head;
+    ListNode* prev = nullptr;
+    while (fast != nullptr && fast->next != nullptr) {
+        prev = slow;
+        slow = slow->next;
+        fast = fast->next->next;
     }
-    ListNode* prev = NULL;
-    temp = head;
-    for(int i=0;i<count/2;i++){
-        prev = temp;
-        temp = temp->next;
-    }
-    prev->next = temp->next;
+    prev->next = slow->next;
     return head;
-
 }
 
 void printList(ListNode* node){
@@ -45,7 +41,7 @@ int main(){
 
     printList(head);
 
-    delete_middle_node(head);
+    head = delete_middle_node(head);
 
     printList(head);
 
