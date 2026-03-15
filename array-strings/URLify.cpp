@@ -12,7 +12,7 @@ void URLify (string& str,int n){
         }
     }
     int index = n + space_count*2;
-    if(n < str.length()) str[n] = '\0';
+    if(n < str.length()) str.resize(n + space_count*2);
     for(int i = n-1;i>=0;i--){
         if(str[i] == ' '){
             str[index-1] = '0';
@@ -24,6 +24,7 @@ void URLify (string& str,int n){
             index = index - 1;
         }
     }
+    str.resize(index);
 }
 
 
