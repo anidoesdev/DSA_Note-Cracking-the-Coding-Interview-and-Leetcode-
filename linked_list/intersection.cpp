@@ -1,3 +1,4 @@
+```cpp
 #include<iostream>
 #include<map>
 
@@ -64,8 +65,11 @@ int main(){
     printList(head2);
 
     ListNode* res = findIntersection(head1,head2);
-    cout<< res->val;
-
+    if(res != NULL)
+        cout<< res->val;
+    else
+        cout << "No intersection found";
 
     return 0;
 }
+```
