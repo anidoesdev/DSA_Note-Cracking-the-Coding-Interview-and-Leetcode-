@@ -11,23 +11,26 @@ struct ListNode {
 };
 
 ListNode* partition(ListNode* head,int partition){
-    ListNode* start = head;
-    ListNode* end = head;
-    while(head != NULL){
-        ListNode* temp = head->next;
-        if(head->val < partition){
-            head->next = start;
-            start = head;
-        }else{
-            end->next = head;
-            end = head;
-        }
-        head = temp;
+    ListNode* before = new ListNode(0);
+    ListNode* beforeHead = before;
+    ListNode* after = new ListNode(0);
+    ListNode* afterHead = after;
 
+    while(head != NULL){
+        if(head->val < partition){
+            before->next = head;
+            before = before->next;
+        }else{
+            after->next = head;
+            after = after->next;
+        }
+        head = head->next;
     }
-    end->next = NULL;
-    return start;
+    after->next = NULL;
+    before->next = afterHead->next;
+    return beforeHead->next;
 }
+
 void printList(ListNode* node){
     while(node!=nullptr){
         cout<< node->val << "->";
@@ -35,7 +38,6 @@ void printList(ListNode* node){
     }
     cout<< "NULL"<< endl;
 }
-
 
 int main(){
     ListNode* head = new ListNode(3);
@@ -49,8 +51,5 @@ int main(){
     printList(head);
     ListNode* start = partition(head,5);
     printList(start);
-    
-
-
     return 0;
 }
