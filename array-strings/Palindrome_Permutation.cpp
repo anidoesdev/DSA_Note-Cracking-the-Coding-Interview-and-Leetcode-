@@ -1,39 +1,20 @@
-#include <iostream>
-#include <string>
-#include <map>
+```python
+def permutation_of_palindrome(s):
+    char_count = {}
+    for char in s:
+        if char in char_count:
+            char_count[char] += 1
+        else:
+            char_count[char] = 1
 
-using namespace std;
+    odd_count = 0
+    for count in char_count.values():
+        if count % 2 != 0:
+            odd_count += 1
+        if odd_count > 1:
+            return False
+    return True
 
-bool permutation_of_palindrome (string& str){
-    map<char,int> mp;
-    int n = str.length();
-    for(int i=0;i<str.length();i++){
-        char ch = str[i];
-        mp[ch]++;
-    }
-    int count = 0;
-    for(auto& m:mp){
-        if(n%2 == 0){
-            if(m.second % 2 != 0){
-                return false;
-            }
-        }else{
-            if(m.second % 2 !=0){
-                count++;
-            }
-            if(count > 1){
-                return false;
-            }
-        }
-    }
-    return true;
-
-}
-
-int main(){
-    
-    string str = "tactcoa";
-    cout<< permutation_of_palindrome(str);
-    return 0;
-}
-
+str = "tactcoa"
+print(permutation_of_palindrome(str))
+```
