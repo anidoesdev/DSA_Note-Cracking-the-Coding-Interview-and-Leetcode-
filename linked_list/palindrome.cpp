@@ -9,26 +9,53 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 ListNode* reverse(ListNode* head){
-    ListNode* temp = NULL;
+    ListNode* prev = NULL;
     while(head!=NULL){
-        ListNode* n = new ListNode(head->val);
-        n->next = temp;
-        temp = n;
-        head = head->next;
+        ListNode* next = head->next;
+        head->next = prev;
+        prev = head;
+        head = next;
     }
-    return temp;
+    return prev;
 }
-bool isPalindrome(ListNode* head,ListNode* reverse){
-    while(head!=NULL && reverse!=NULL){
-        if(head->val != reverse->val){
-            return false;
-        }
-        head = head->next;
-        reverse = reverse->next;
+bool isPalindrome(ListNode* head){
+    if (head == NULL)
+        return true;
+
+    ListNode* endOfFirstHalf = endOfFirstHalfFunc(head);
+    ListNode* second = reverseList(endOfFirstHalf->next);
+
+    bool result = true;
+    ListNode* firstPosition = head;
+    ListNode* secondPosition = second;
+    while (result && secondPosition != NULL) {
+        if (firstPosition->val != secondPosition->val) result = false;
+        firstPosition = firstPosition->next;
+        secondPosition = secondPosition->next;
+    }     
+    endOfFirstHalf->next = reverseList(second);
+    return result;
+}
+ListNode* endOfFirstHalfFunc(ListNode* head) {
+    ListNode* slow = head;
+    ListNode* fast = head;
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
     }
-    return true;
+    return slow;
 }
-//different approaches left
+ListNode* reverseList(ListNode* head) {
+    ListNode* prev = NULL;
+    ListNode* curr = head;
+    while (curr != NULL) {
+        ListNode* nextTemp = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nextTemp;
+    }
+    return prev;
+}
 int main(){
     ListNode* head = new ListNode(0);
     head->next = new ListNode(1);
@@ -36,10 +63,7 @@ int main(){
     head->next->next->next = new ListNode(1);
     head->next->next->next->next = new ListNode(0);
 
-    ListNode* node = head;
-    ListNode* rev = reverse(head);
-
-    cout<< isPalindrome(node,rev);
+    cout<< isPalindrome(head);
 
     return 0;
 }
