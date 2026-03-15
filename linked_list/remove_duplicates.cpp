@@ -1,78 +1,50 @@
-#include <iostream>
-#include <set>
-using namespace std;
+```python
+class ListNode:
+    def __init__(self, x):
+        self.val = x
+        self.next = None
 
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode(int x) : val(x), next(nullptr) {}
-    // ListNode() : val(0), next(nullptr) {}
-    // ListNode(int x) : val(x), next(nullptr) {}
-    // ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
+def remove_dups(head):
+    st = set()
+    prev = None
+    while head is not None:
+        if head.val in st:
+            prev.next = head.next
+        else:
+            st.add(head.val)
+            prev = head
+        head = head.next
 
-void remove_dups(ListNode* head){
-    set<int> st;
-    ListNode* prev = NULL;
-    while(head != nullptr){
-        if(st.find(head->val) != st.end()){
-            prev->next = head->next;
-        }else{
-            st.insert(head->val);
-            prev = head;
-        }
-        
-        
-        head = head->next;
-    }
-}
-//no buffer required 
-void using_two_pointer(ListNode* head){
-    ListNode* slow = head;
-    
+def using_two_pointer(head):
+    slow = head
+    while slow is not None:
+        fast = slow
+        while fast.next is not None:
+            if fast.next.val == slow.val:
+                fast.next = fast.next.next
+            else:
+                fast = fast.next
+        slow = slow.next
 
-    while(slow!=NULL){
-        ListNode* fast = slow;
-        while(fast->next != NULL){
-            if(fast->next->val == slow->val){
-                fast->next = fast->next->next;
-            }else{
-                fast = fast->next;
-            }
-            
-        }
-        slow = slow->next;
+def print_list(node):
+    while node is not None:
+        print(node.val, end='->')
+        node = node.next
+    print('NULL')
 
-    }
-}
+def main():
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(2)
+    head.next.next.next = ListNode(3)
+    head.next.next.next.next = ListNode(4)
 
-void printList(ListNode* node){
-    while(node!=nullptr){
-        cout<< node->val << "->";
-        node = node->next;
-    }
-    cout<< "NULL"<< endl;
-}
+    print_list(head)
 
+    using_two_pointer(head)
 
-int main(){
-    ListNode* head = new ListNode(1);
-    head->next = new ListNode(2);
-    head->next->next = new ListNode(2);
-    head->next->next->next = new ListNode(3);
-    head->next->next->next->next = new ListNode(4);
+    print_list(head)
 
-    printList(head);
-
-    // remove_dups(head);
-    using_two_pointer(head);
-
-
-    printList(head);
-
-    return 0;
-}
-
-
-
-
+if __name__ == "__main__":
+    main()
+```
