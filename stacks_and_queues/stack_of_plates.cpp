@@ -10,8 +10,8 @@ class multiStack{
     int curr;
     public:
         multiStack(int capacity){
+            this->capacity = capacity;
             curr = -1;
-            capacity = capacity;
         }
         void push(int value){
             if(curr == -1 || st[curr]->size()==capacity){
@@ -31,11 +31,26 @@ class multiStack{
                     res = st[curr]->top();
                     st[curr]->pop();
                     if(st[curr]->size()==0){
+                        delete st[curr];
                         st.pop_back();
                         curr--;
                         cout<<"stack deleted";
                     }
                     
+                } else {
+                    delete st[curr];
+                    st.pop_back();
+                    curr--;
+                    if(curr > -1) {
+                        res = st[curr]->top();
+                        st[curr]->pop();
+                        if(st[curr]->size()==0){
+                            delete st[curr];
+                            st.pop_back();
+                            curr--;
+                            cout<<"stack deleted";
+                        }
+                    }
                 }
                 return res;
             }
