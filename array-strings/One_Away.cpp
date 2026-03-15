@@ -1,38 +1,34 @@
-#include <iostream>
-#include <string>
-#include <math.h>
-
-using namespace std;
-
-bool one_away(string& str1, string& str2){
-    if(abs(static_cast<int>(str1.length()) - static_cast<int>(str2.length())) > 1) return false;
-    int count = 0;
-    string first = str1.length() < str2.length() ? str1 : str2;
-    string second = str1.length() < str2.length() ? str2 : str1;
+```python
+def one_away(str1, str2):
+    if abs(len(str1) - len(str2)) > 1:
+        return False
+    count = 0
+    first = str1 if len(str1) < len(str2) else str2
+    second = str2 if len(str1) < len(str2) else str1
     
-    int i = 0;
-    int j = 0;
-    while(i<str1.length() && j<str2.length()){
-        if(first[i]!=second[j]){
-            if(count >= 1) return false;
-            count++;
-        }
-        if(second.length() == first.length()){
-            i++;
-        }else{
-            i++;
-        }
-        j++;
-    }
-    return true;
-}
+    i = 0
+    j = 0
+    while i < len(first) and j < len(second):
+        if first[i] != second[j]:
+            if count >= 1:
+                return False
+            count += 1
+            if len(first) == len(second):
+                i += 1
+            else:
+                j += 1
+        else:
+            i += 1
+            j += 1
+    return True
 
 
-int main(){
-    string str1 = "pale";
-    string str2 = "pal";
+def main():
+    str1 = "pale"
+    str2 = "pal"
 
-    cout<< one_away(str1,str2);
+    print(one_away(str1, str2))
 
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
