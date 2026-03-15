@@ -9,8 +9,8 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
-//naive solution
-ListNode* findIntersection(ListNode*head1,ListNode*head2){
+
+ListNode* findIntersection(ListNode* head1, ListNode* head2){
     map<ListNode*,int> mp;
     while(head1!=NULL){
         mp[head1]++;
@@ -24,6 +24,7 @@ ListNode* findIntersection(ListNode*head1,ListNode*head2){
     }
     return NULL;
 }
+
 void insertNode(ListNode* &node,int val){
     ListNode* newNode = new ListNode(val);
     if(node == NULL){
@@ -34,8 +35,8 @@ void insertNode(ListNode* &node,int val){
     while(temp->next != NULL) temp = temp->next;
     temp->next = newNode;
     return;
-
 }
+
 void printList(ListNode* node){
     while(node!=nullptr){
         cout<< node->val << "->";
@@ -43,8 +44,6 @@ void printList(ListNode* node){
     }
     cout<< "NULL"<< endl;
 }
-
-
 
 int main(){
     ListNode* head = NULL;
@@ -64,8 +63,10 @@ int main(){
     printList(head2);
 
     ListNode* res = findIntersection(head1,head2);
-    cout<< res->val;
-
+    if(res != NULL)
+        cout<< res->val;
+    else
+        cout << "No intersection found";
 
     return 0;
 }
