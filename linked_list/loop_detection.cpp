@@ -1,6 +1,5 @@
 #include<iostream>
 
-
 using namespace std;
 struct ListNode {
     int val;
@@ -11,31 +10,31 @@ struct ListNode {
 };
 ListNode* loop_detection(ListNode* head){
     ListNode* slow = head;
-    ListNode* fast= head;
+    ListNode* fast = head;
 
-    while(fast!=NULL && fast->next!=NULL){
+    while(fast != NULL && fast->next != NULL){
         slow = slow->next;
         fast = fast->next->next;
         if(slow == fast){
             break;
         }
     }
-    if(fast==NULL || fast->next == NULL){
+    if(fast == NULL || fast->next == NULL){
         return NULL;
     }
     slow = head;
-    while (slow!=fast){
+    while(slow != fast){
        slow = slow->next;
        fast = fast->next;
     }
-    return fast;
+    return slow;
 }
 void printList(ListNode* node){
-    while(node!=nullptr){
-        cout<< node->val << "->";
+    while(node != nullptr){
+        cout << node->val << "->";
         node = node->next;
     }
-    cout<< "NULL"<< endl;
+    cout << "NULL" << endl;
 }
 
 int main(){
@@ -47,7 +46,7 @@ int main(){
     head->next->next->next->next = head->next;
     
     ListNode* res = loop_detection(head);
-    cout<< res->val;
+    cout << res->val;
 
     
     return 0;
