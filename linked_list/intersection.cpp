@@ -1,71 +1,58 @@
-#include<iostream>
-#include<map>
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-using namespace std;
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-//naive solution
-ListNode* findIntersection(ListNode*head1,ListNode*head2){
-    map<ListNode*,int> mp;
-    while(head1!=NULL){
-        mp[head1]++;
-        head1 = head1->next;
-    }
-    while(head2!=NULL){
-        if(mp.find(head2)!=mp.end()){
-            return head2;
-        }
-        head2 = head2->next;
-    }
-    return NULL;
-}
-void insertNode(ListNode* &node,int val){
-    ListNode* newNode = new ListNode(val);
-    if(node == NULL){
-        node = newNode;
-        return;
-    }
-    ListNode* temp = node;
-    while(temp->next != NULL) temp = temp->next;
-    temp->next = newNode;
-    return;
+def find_intersection(head1, head2):
+    mp = {}
+    while head1:
+        mp[head1] = 1
+        head1 = head1.next
+    while head2:
+        if head2 in mp:
+            return head2
+        head2 = head2.next
+    return None
 
-}
-void printList(ListNode* node){
-    while(node!=nullptr){
-        cout<< node->val << "->";
-        node = node->next;
-    }
-    cout<< "NULL"<< endl;
-}
+def insert_node(node, val):
+    new_node = ListNode(val)
+    if not node:
+        node = new_node
+        return node
+    temp = node
+    while temp.next:
+        temp = temp.next
+    temp.next = new_node
+    return node
 
+def print_list(node):
+    while node:
+        print(node.val, end='->')
+        node = node.next
+    print('NULL')
 
+def main():
+    head = None
+    head = insert_node(head, 1)
+    head = insert_node(head, 3)
+    head = insert_node(head, 1)
+    head = insert_node(head, 2)
+    head = insert_node(head, 4)
+    head1 = head
+    head = head.next.next.next
+    head_sec = None
+    head_sec = insert_node(head_sec, 3)
+    head2 = head_sec
+    head_sec = head_sec.next
+    head_sec.next = head
 
-int main(){
-    ListNode* head = NULL;
-    insertNode(head,1);
-    insertNode(head,3);
-    insertNode(head,1);
-    insertNode(head,2);
-    insertNode(head,4);
-    ListNode* head1 = head;
-    head = head->next->next->next;
-    ListNode* headSec = NULL;
-    insertNode(headSec,3);
-    ListNode* head2 = headSec;
-    headSec->next = head;
+    print_list(head1)
+    print_list(head2)
 
-    printList(head1);
-    printList(head2);
+    res = find_intersection(head1, head2)
+    print(res.val)
 
-    ListNode* res = findIntersection(head1,head2);
-    cout<< res->val;
-
-
-    return 0;
-}
+if __name__ == "__main__":
+    main()
+```
