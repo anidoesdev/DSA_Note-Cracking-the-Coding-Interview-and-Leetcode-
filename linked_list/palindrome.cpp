@@ -1,45 +1,38 @@
-#include<iostream>
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-using namespace std;
-struct ListNode {
-    int val;
-    ListNode *next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
-};
-ListNode* reverse(ListNode* head){
-    ListNode* temp = NULL;
-    while(head!=NULL){
-        ListNode* n = new ListNode(head->val);
-        n->next = temp;
-        temp = n;
-        head = head->next;
-    }
-    return temp;
-}
-bool isPalindrome(ListNode* head,ListNode* reverse){
-    while(head!=NULL && reverse!=NULL){
-        if(head->val != reverse->val){
-            return false;
-        }
-        head = head->next;
-        reverse = reverse->next;
-    }
-    return true;
-}
-//different approaches left
-int main(){
-    ListNode* head = new ListNode(0);
-    head->next = new ListNode(1);
-    head->next->next = new ListNode(2);
-    head->next->next->next = new ListNode(1);
-    head->next->next->next->next = new ListNode(0);
+def reverse(head):
+    temp = None
+    while head is not None:
+        n = ListNode(head.val)
+        n.next = temp
+        temp = n
+        head = head.next
+    return temp
 
-    ListNode* node = head;
-    ListNode* rev = reverse(head);
+def is_palindrome(head, reverse_head):
+    while head is not None and reverse_head is not None:
+        if head.val != reverse_head.val:
+            return False
+        head = head.next
+        reverse_head = reverse_head.next
+    return True
 
-    cout<< isPalindrome(node,rev);
+def main():
+    head = ListNode(0)
+    head.next = ListNode(1)
+    head.next.next = ListNode(2)
+    head.next.next.next = ListNode(1)
+    head.next.next.next.next = ListNode(0)
 
-    return 0;
-}
+    node = head
+    rev = reverse(head)
+
+    print(is_palindrome(node, rev))
+
+if __name__ == "__main__":
+    main()
+```
