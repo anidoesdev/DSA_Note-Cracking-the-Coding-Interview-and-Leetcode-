@@ -1,73 +1,68 @@
-//Approach 1: Fixed divisions
-//have to complete it with second approach: flexible divisions
+```cpp
 #include<iostream>
 #include<vector>
 using namespace std;
 
-class fixedMultiStack {
+class flexibleMultiStack {
     private:
-        int number_of_stack = 3;
-        int stack_capacity;
-        vector<int> values;
-        vector<int> sizes;
+        vector<vector<int>> stacks;
     public:
-        fixedMultiStack(int stackSize){
-            stack_capacity = stackSize;
-            values.resize(stackSize*number_of_stack);
-            sizes.resize(number_of_stack);
+        flexibleMultiStack(int number_of_stack){
+            for(int i = 0; i < number_of_stack; i++){
+                vector<int> stack;
+                stacks.push_back(stack);
+            }
         }
         void push(int value,int stackNum){
-            if(isFull(stackNum)){
+            if(stackNum < 0 || stackNum >= stacks.size()){
                 return;
             }
-            sizes[stackNum]++;
-            values[indexofTop(stackNum)] = value;
+            stacks[stackNum].push_back(value);
         }
         int pop(int stackNum){
-            if(isEmpty(stackNum)){
+            if(stackNum < 0 || stackNum >= stacks.size()){
                 return -1;
             }
-            int topIndex = indexofTop(stackNum);
-            int value = values[topIndex];
-            values[topIndex] = 0;
-            sizes[stackNum]--;
+            if(stacks[stackNum].empty()){
+                return -1;
+            }
+            int value = stacks[stackNum].back();
+            stacks[stackNum].pop_back();
             return value;
         }
         int top(int stackNum){
-            if(isEmpty(stackNum)){
+            if(stackNum < 0 || stackNum >= stacks.size()){
                 return -1;
             }
-            return values[indexofTop(stackNum)];
-        }
-        int indexofTop(int stackNum){
-            int offset = stackNum * stack_capacity;
-            int size = sizes[stackNum];
-            return offset + size - 1;
+            if(stacks[stackNum].empty()){
+                return -1;
+            }
+            return stacks[stackNum].back();
         }
         bool isEmpty(int stackNum){
-            return sizes[stackNum] == 0;
+            if(stackNum < 0 || stackNum >= stacks.size()){
+                return true;
+            }
+            return stacks[stackNum].empty();
         }
-
-        bool isFull(int stackNum){
-            return sizes[stackNum] == stack_capacity;
-        }
-    
-    
 
 };
 
 int main(){
-    fixedMultiStack st(5);
-    st.push(5,1);
-    st.push(6,1);
-    st.push(1,1);
-    st.push(3,1);
-    st.push(4,1);
-    st.push(10,2);
+    flexibleMultiStack st(3);
+    st.push(5,0);
+    st.push(6,0);
+    st.push(1,0);
+    st.push(3,0);
+    st.push(4,0);
+    st.push(10,1);
+    st.push(11,1);
+    st.push(12,1);
+    cout<< st.pop(0)<<endl;
     cout<< st.pop(1)<<endl;
-    // cout<< st.pop(2)<<endl;
-    cout<< st.top(2)<<endl;
-    cout<<st.top(1);
+    cout<< st.top(1)<<endl;
+    cout<< st.top(0);
 
     return 0;
 }
+```

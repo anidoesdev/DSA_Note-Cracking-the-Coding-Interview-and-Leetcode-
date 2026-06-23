@@ -1,3 +1,4 @@
+```cpp
 #include<iostream>
 #include<cmath>
 
@@ -11,8 +12,9 @@ struct ListNode {
 };
 
 ListNode* sum_list(ListNode* head1,ListNode* head2,int carry){
-    //by taking numbers in reverse order
-    ListNode* res = new ListNode();
+    if (head1 == NULL && head2 == NULL && carry == 0) {
+        return NULL;
+    }
     int value = carry;
     if(head1!=NULL){
         value+=head1->val;
@@ -20,40 +22,11 @@ ListNode* sum_list(ListNode* head1,ListNode* head2,int carry){
     if(head2!=NULL){
         value+=head2->val;
     }
-    res->val = value%10;
-    if(head1!=NULL || head2!=NULL){
-        ListNode* sum = sum_list(head1==NULL ? NULL : head1->next,head2==NULL ? NULL : head2->next,value>=10 ? 1 : 0);
-        res->next = sum;
-    }
+    ListNode* res = new ListNode(value % 10);
+    res->next = sum_list(head1 == NULL ? NULL : head1->next, head2 == NULL ? NULL : head2->next, value >= 10 ? 1 : 0);
     return res;
-
-    //by taking in forward order
-    // int count1 = 0;
-    // ListNode* temp1 = head1;
-    // while(temp1!=NULL){
-    //     count1++;
-    //     temp1 = temp1->next;
-    // }
-    // temp1 = head1;
-    // int num1 = 0;
-    // for(int i=count1;i>0;i--){
-    //     num1=((pow(10,i-1))*temp1->val)+num1;
-    //     temp1 = temp1->next;
-    // }
-    // int count2 = 0;
-    // ListNode* temp2 = head2;
-    // while(temp2!=NULL){
-    //     count2++;
-    //     temp2 = temp2->next;
-    // }
-    // temp2 = head2;
-    // int num2 = 0;
-    // for(int i=count2;i>0;i--){
-    //     num2+=pow(10,i-1)*temp2->val;
-    //     temp2 = temp2->next;
-    // }
-    // return num1+num2;
 }
+
 void printList(ListNode* node){
     while(node!=nullptr){
         cout<< node->val << "->";
@@ -61,8 +34,6 @@ void printList(ListNode* node){
     }
     cout<< "NULL"<< endl;
 }
-
-
 
 int main(){
     ListNode* head1 = new ListNode(3);
@@ -75,6 +46,6 @@ int main(){
 
     printList(sum_list(head1,head2,0));
 
-
     return 0;
 }
+```

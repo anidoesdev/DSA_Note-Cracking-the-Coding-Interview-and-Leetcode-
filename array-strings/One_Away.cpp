@@ -12,19 +12,26 @@ bool one_away(string& str1, string& str2){
     
     int i = 0;
     int j = 0;
-    while(i<str1.length() && j<str2.length()){
+    while(i<first.length() && j<second.length()){
         if(first[i]!=second[j]){
             if(count >= 1) return false;
             count++;
-        }
-        if(second.length() == first.length()){
-            i++;
+            if(first.length() == second.length()){
+                i++;
+                j++;
+            }else{
+                j++;
+            }
         }else{
             i++;
+            j++;
         }
-        j++;
     }
-    return true;
+    if(i < first.length() || j < second.length()) {
+        if(count >= 1) return false;
+        count++;
+    }
+    return count <= 1;
 }
 
 

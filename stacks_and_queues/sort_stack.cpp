@@ -9,24 +9,19 @@ stack<int> sort_stack(stack<int> st){
         int temp = st.top();
         st.pop();
         while(!sort.empty() && sort.top() > temp){
-
             st.push(sort.top());
             sort.pop();
         }
         sort.push(temp);
     }
-    while (!sort.empty())
-    {
-        st.push(sort.top());
-        sort.pop();
-    }
-    return st;
-    
+    return sort;
 }
-void print_stack(stack<int>* st){
-    while(!st->empty()){
-        cout<< st->top()<<endl;
-        st->pop();
+
+void print_stack(stack<int> st){
+    stack<int> temp = st;
+    while(!temp.empty()){
+        cout<< temp.top()<<endl;
+        temp.pop();
     }
 }
 
@@ -39,13 +34,8 @@ int main(){
     st.push(1);
     st.push(6);
 
-    
     st = sort_stack(st);
-    print_stack(&st);
-
-    
-
-
+    print_stack(st);
 
     return 0;
 }

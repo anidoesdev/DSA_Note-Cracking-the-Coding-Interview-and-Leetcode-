@@ -1,4 +1,3 @@
-//aabcccccddd would become a2b1c5d3
 #include <iostream>
 #include <map>
 #include <string>
@@ -20,9 +19,7 @@ string compression(string& str){
 }
 
 int main(){
-    string str = "aabcccdd";
-
+    string str = "//aabcccccddd";
     cout<< compression(str);
-
     return 0;
 }

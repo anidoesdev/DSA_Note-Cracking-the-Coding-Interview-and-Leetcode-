@@ -18,6 +18,10 @@ class MyQueue{
             st1 = new stack<int>;
             st2 = new stack<int>;
         }
+        ~MyQueue(){
+            delete st1;
+            delete st2;
+        }
         void push(int value){
             st1->push(value);
         }
